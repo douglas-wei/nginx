@@ -24,31 +24,40 @@ Jetty
 Node.js
 # web服务组合
 比较早的，比较经典的web服务组合
+
 LAMP（linux  apache  mysql  php）
 
 近几年的一个web服务组合
+
 LNMP（linux  nginx  mysql  php）
+
 LEMP（linux  （engine   x） mysql   php）
 # nginx
 http://nginx.org/en/docs/
 nginx本身是一款静态（html，js，css，jpg等）www软件
 静态小文件高并发，同时占用资源少  3w并发   10个线程  150M
 
-国内网站使用nginx更多一些
-nginx服务从大的方面的功能
 ## nginx三大应用
 1、 www  web 服务
+
 2、 负载均衡 （反向代理proxy）
+
 3、 web cache（web缓存）
 [https://w3techs.com/technologies/overview/web_server/all](https://w3techs.com/technologies/overview/web_server/all)
 [图片上传失败...(image-ecf6c2-1561896934467)]
 ## nginx功能
 可针对静态资源高速高并发访问及缓存
+
 可使用反向代理加速，并且可进行数据缓存
+
 具有简单负载均衡、节点健康检查和容错功能
+
 支持远程FastCGI服务的缓存加速
+
 支持FastCGI、Uwsgi、SCGI、and Memcached Servers的加速和缓存
+
 支持SSL、TLS、SNI
+
 具有模块化的架构：过滤器包括gzip压缩、ranges支持、chunked响应、XSLT、SSI及图像缩放等功能。在SSI过滤器中，一个包含多个SSI的页面，如果经由FastCGI或反向代理处理，可被并行处理
 
 支持http2.0协议
@@ -69,14 +78,19 @@ nginx配合动态服务和apache有区别
 ## nginx应用场合
 1、 静态服务器（图片，视频服务），另一个lighttpd
       html，js，css，flv等
+
 2、 动态服务，nginx+fastcgi 运行php，jsp 并发 500-1500
     apache+php， Lighttpd+fcgi php
+
 3、反向代理，负载均衡  日pv2000W一下，都可以直接用nginx做代理
    haproxy， F5， a10
+
 4、缓存服务 squid，varnish
 ## nginx作为web服务器的主要应用场合
 使用nginx运行html、js、css、小图片等静态数据
+
 nginx结合fastcgi运行php等动态程序（fastcgi_pass）
+
 nginx 结合tomcat/resin 等支持java动态程序（proxy_pass）
 ## nginx和其他web服务的对比
 ### 静态
@@ -85,21 +99,26 @@ nginx 结合tomcat/resin 等支持java动态程序（proxy_pass）
 [图片上传失败...(image-a09ed8-1561896934468)]
 ## nginx与其他web软件对比
 先来看看apache的特点
+
 高并发时消耗系统资源相对多一些
+
 基于传统的select模型，高并发能力有限
+
 支持扩展库，可通过DSO、apxs方法编译安装额外的插件功能，不需要重新编译apache
+
 功能多，更稳定，更安全，插件也多
+
 市场份额在逐年递减
 [图片上传失败...(image-3b7fcd-1561896934468)]
 ## 如何选择web服务器
 静态业务：高并发，采用nginx或lighttpd，根据自己的掌握程度或公司要求
-动态业务：采用nginx和apache均可
-既有静态业务又有动态：nginx或apache，不要多选，要单选
-动态业务可以由前端代理（haproxy），根据页面元素的类型，向后转发相应的服务器进行处理
-如果并发不是很大，又对apache很熟悉，采用apache也是可以的，apache2.4版本也很强大，
-并发连接数也有所增加
 
-nginx做web （apache、lighttpd）、反向代理（haproxy，lvs  nat）、缓存服务器 （squid）
+动态业务：采用nginx和apache均可
+
+既有静态业务又有动态：nginx或apache，不要多选，要单选
+
+动态业务可以由前端代理（haproxy），根据页面元素的类型，向后转发相应的服务器进行处理
+
 ## 反向代理或负载均衡服务
 在反向代理或负载均衡服务方面，nginx可以作为web服务、php等动态服务及
 memcached 缓存的代理服务器，它具有类似专业反向代理软件（如haproxy）的
@@ -112,16 +131,27 @@ memcached 缓存的代理服务器，它具有类似专业反向代理软件（�
   处理大量连接的读写，apache所采用的select网络I/O模型比较低效
 # linux下软件安装
 1、 rpm -ivh  *.rpm
+
     有依赖问题
+
 2、 yum安装  解决rpm安装的依赖问题，安装更简单化
+
     优点：简单  易用  高效
+
     缺点：不能定制
+
 3、源码包编译安装
+
 ./configure     #配置
+
 make         #编译
+
 make install    #安装
+
 4、定制rpm包，搭建yum仓库，把我们定制的rpm包放到yum仓库，进行yum安装
+
     优点：2和3 的优点
+
     缺点：复杂
 # nginx安装
 ## 下载nginx软件包
@@ -1437,22 +1467,6 @@ tcp        0      0 127.0.0.1:9000              0.0.0.0:*                   LIST
 ```
 # **nginx整合php**
 ## **nginx配置文件**
-cat bbs.conf
-```
-    server {
-        listen       80;
-        server_name  bbs.etiantian.org;
-            root   html/bbs;
-            index  index.php index.html index.htm;
-            access_log  logs/bbs_access.log;
-        location ~ .*\.(php|php5)?$ {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_index  index.php;
-            include        fastcgi.conf;
-        }
-
-    }
-```
 blog.oldboy.com.conf
 ```
 server {
