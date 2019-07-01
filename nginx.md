@@ -1,15 +1,26 @@
 本文作者: **五行哥**
+
 QQ: **1226032602**
+
 E-mail: **1226032602@qq.com**
+
 # web服务器种类
 apache
+
 nginx
+
 tomcat
+
 resin
+
 Lighttpd
+
 IIS
+
 WebLogic
+
 Jetty
+
 Node.js
 # web服务组合
 比较早的，比较经典的web服务组合
