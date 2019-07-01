@@ -1,8 +1,8 @@
-本文作者: **五行哥**
+本文作者: 五行哥
 
-QQ: **1226032602**
+QQ: 1226032602
 
-E-mail: **1226032602@qq.com**
+E-mail: 1226032602@qq.com
 
 # web服务器种类
 apache
@@ -34,6 +34,7 @@ LNMP（linux  nginx  mysql  php）
 LEMP（linux  （engine   x） mysql   php）
 # nginx
 http://nginx.org/en/docs/
+
 nginx本身是一款静态（html，js，css，jpg等）www软件
 静态小文件高并发，同时占用资源少  3w并发   10个线程  150M
 
@@ -43,7 +44,9 @@ nginx本身是一款静态（html，js，css，jpg等）www软件
 2、 负载均衡 （反向代理proxy）
 
 3、 web cache（web缓存）
+
 [https://w3techs.com/technologies/overview/web_server/all](https://w3techs.com/technologies/overview/web_server/all)
+
 [图片上传失败...(image-ecf6c2-1561896934467)]
 ## nginx功能
 可针对静态资源高速高并发访问及缓存
@@ -61,11 +64,13 @@ nginx本身是一款静态（html，js，css，jpg等）www软件
 具有模块化的架构：过滤器包括gzip压缩、ranges支持、chunked响应、XSLT、SSI及图像缩放等功能。在SSI过滤器中，一个包含多个SSI的页面，如果经由FastCGI或反向代理处理，可被并行处理
 
 支持http2.0协议
+
 [http://nginx.org/en/docs/http/ngx_http_v2_module.html](http://nginx.org/en/docs/http/ngx_http_v2_module.html)
 ## nginx优点
 高并发（静态小文件）， 静态 1-2W
-功能种类比较多（web，cache，proxy），每个功能都不是特别强
-nginx配合动态服务和apache有区别
+
+功能种类比较多（web，cache，proxy）
+
 利用nginx可以对ip限速，可以限制连接数
 
 基于异步网络I/O模型（epoll、kqueue）使得nginx可以支持高并发
@@ -74,9 +79,9 @@ nginx配合动态服务和apache有区别
 对小文件（小于1MB的静态文件）高并发支持好，性能很高
 不支持类似apache的DSO模式，扩展库必须编译进主程序（缺点）
 进程占用系统资源比较低
-支持web、反向proxy、cache 三大重点功能，并且都很优秀
+
 ## nginx应用场合
-1、 静态服务器（图片，视频服务），另一个lighttpd
+1、 静态服务器（图片，视频服务）
       html，js，css，flv等
 
 2、 动态服务，nginx+fastcgi 运行php，jsp 并发 500-1500
@@ -108,8 +113,7 @@ nginx 结合tomcat/resin 等支持java动态程序（proxy_pass）
 
 功能多，更稳定，更安全，插件也多
 
-市场份额在逐年递减
-[图片上传失败...(image-3b7fcd-1561896934468)]
+
 ## 如何选择web服务器
 静态业务：高并发，采用nginx或lighttpd，根据自己的掌握程度或公司要求
 
@@ -164,8 +168,10 @@ yum install gcc gcc-c++ automake autoconf
 ```
 ## 安装pcre
 https://regexr.com/
+
 http://www.regexlab.com/zh/deelx/
-   pcre全称（Perl Compatible Regular Expressions），中文“perl兼容正则表达式”，官方站点为
+
+pcre全称（Perl Compatible Regular Expressions），中文“perl兼容正则表达式”，官方站点为
 http://www.pcre.org  安装pcre库是为了使nginx支持具备URI重写功能的rewrite模块，如果不安装pcre库，则nginx无法使用rewrite模块功能，nginx的rewrite模块功能几乎是企业应用必须
 ```
 yum install pcre pcre-devel -y
@@ -342,10 +348,13 @@ ssl        ssl模块，用于加密的http连接，如https
 stub_status   记录nginx基本访问状态信息
 ```
 ## nginx核心功能模块（Core functionality）
-nginx核心功能模块负责nginx的全局应用，主要对应主配置文件的main区块和events区块区域，这里有很多nginx必须的全局参数配置。有关核心功能模块的详细信息官方地址
+nginx核心功能模块负责nginx的全局应用，主要对应主配置文件的main区块和events区块区域，这里有很多nginx必须的全局参数配置
+
 http://nginx.org/en/docs/ngx_core_module.html
-| ngx_http_core_module   | 包括一些核心的http参数配置，对应nginx的配置为http区块部分   |
-|----|----|
+
+
+| ngx_http_core_module | 包括一些核心的http参数配置，对应nginx的配置为http区块部分 |
+|---|---|
 | ngx_http_access_module   | 访问控制模块，用来控制网站用户对nginx的访问   |
 | ngx_http_gzip_module   | 压缩模块，对nginx返回的数据压缩，属于性能优化模块   |
 | ngx_http_fastcgi_module   | fastcgi模块，和动态应用相关的模块，例如PHP   |
@@ -358,7 +367,8 @@ http://nginx.org/en/docs/ngx_core_module.html
 | ngx_http_auth_basic_module   | web认证模块，设置web用户通过账号密码访问nginx   |
 | ngx_http_ssl_module   | ssl模块，用于加密的http连接，如https   |
 | ngx_http_stub_status_module   | 记录nginx基本访问状态信息等的模块   |
-## **nginx主配置文件 nginx.conf (默认配置)**
+
+## nginx主配置文件 nginx.conf (默认配置)
 ```
 [root@web01 conf]# egrep -v "#|^$" nginx.conf |cat -n
      1  worker_processes  1;         #worker进程的数量
@@ -436,7 +446,7 @@ oldboy.html
   </body>
 </html>
 ```
-## **nginx （https配置）**
+## nginx （https配置）
 ```
 http {
     include       mime.types;
@@ -483,7 +493,7 @@ server {
     ssl_certificate_key /usr/local/nginx/conf/server.key;
 }
 ```
-## **nginx状态**
+## nginx状态
 status.conf
 ```
 server{
@@ -498,13 +508,19 @@ server{
   }
 ```
 [图片上传失败...(image-84101c-1561896934468)]
+
 第一个server表示nginx启动到现在共处理了67个连接；
+
 第二个accepts表示nginx启动到现在共成功创建67个连接；
+
 请求丢失数=握手数-连接数   可以看出，本次状态显示没有丢失请求
+
 第三个handled  requests 表示总共处理了202次请求；
+
 Reading 为nginx读取到客户端的Header信息数
 
 Writing 为nginx返回给客户端的Header信息数
+
 Waiting 为nginx已经处理完正在等候下一次请求指令的驻留连接。在开启keep-alive的情况下，这个值等于  active-(reading+writing)
 ```yml
 - name: get current http stats
@@ -512,10 +528,10 @@ Waiting 为nginx已经处理完正在等候下一次请求指令的驻留连接�
     url: http://localhost/nginx_status
     timeout: 20
 ```
-## **虚拟主机概念**
+## 虚拟主机概念
 所谓虚拟主机，在web服务里就是一个独立的网站站点，这个站点对应独立的域名（也可能是IP或端口），具有独立的程序及资源目录，可以独立地对外提供服务供用户访问。
 nginx使用一个server{}标签来标示一个虚拟主机，一个web服务里可以有多个虚拟主机标签对，即同时可以支持多个虚拟主机站点
-## **虚拟主机 （基于域名）**
+## 虚拟主机 （基于域名）
 cat nginx.conf
 ```
 worker_processes  1;
@@ -560,7 +576,7 @@ echo web01 www > ../html/www/index.html
 echo web01 bbs > ../html/bbs/index.html
 echo web01 blog > ../html/blog/index.html
 ```
-## **基于端口**
+## 基于端口
 ```
     server {
         listen       8001;
@@ -583,7 +599,7 @@ echo web01 blog > ../html/blog/index.html
             index  index.html index.htm;
     }
 ```
-## **基于ip**
+## 基于ip
 添加网卡别名
 ```
 ip addr add 10.0.0.3/24 dev eth0 label eth0:1
@@ -604,7 +620,7 @@ ip addr add 10.0.0.3/24 dev eth0 label eth0:1
             access_log  logs/bbs_access.log;
     }
 ```
-## **server优先级**
+## server优先级
 多个相同的server_name 配置文件排序第一的优先访问
 
 修改优先级
@@ -620,7 +636,7 @@ index index.html;
 }
 }
 ```
-## **禁止ip访问（防止恶意域名绑定）**
+## 禁止ip访问（防止恶意域名绑定）
 第一个server标签
 ```
     server {
@@ -649,8 +665,9 @@ total 8
 -rw-r--r-- 1 root root 186 Aug 6 09:46 server1.conf
 -rw-r--r-- 1 root root 182 Aug 6 09:54 server2.conf
 ```
-## **nginx autoindex**
+## nginx autoindex
 [http://nginx.org/en/docs/http/ngx_http_autoindex_module.html](http://nginx.org/en/docs/http/ngx_http_autoindex_module.html)
+
 cat nginx.conf
 ```
 worker_processes  1;
@@ -676,9 +693,9 @@ http {
     }
 }
 ```
-# **nginx 访问控制**
+# nginx 访问控制
 [http://nginx.org/en/docs/http/ngx_http_access_module.html](http://nginx.org/en/docs/http/ngx_http_access_module.html)
-## **基于IP的访问控制**
+## 基于IP的访问控制
 ```
 server {
  listen 80;
@@ -692,7 +709,7 @@ server {
  }
 }
 ```
-## **nginx认证（基于用户名和密码）**
+## nginx认证（基于用户名和密码）
 [http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html](http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html)
 ```
 yum install -y  httpd-tools
@@ -727,10 +744,13 @@ web01 www
 [root@web01 conf]# curl -u oldboy:123456 www.etiantian.org
 web01 www
 ```
-# **nginx访问限制**
+# nginx访问限制
 ngx_http_limit_conn_module
+
 ngx_http_limit_req_module
+
 [http://nginx.org/en/docs/http/ngx_http_limit_req_module.html](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html)
+
 cat limit_req.conf
 ```
 limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
@@ -748,9 +768,10 @@ server {
 ```
 ab -n 50 -c 20 http://req.oldboy.com/
 ```
-# **nginx日志**
-## **日志格式**
+# nginx日志
+## 日志格式
 [http://nginx.org/en/docs/http/ngx_http_log_module.html](http://nginx.org/en/docs/http/ngx_http_log_module.html)
+
 | 参数   | 说明   |
 |----|----|
 | log_format   | 用来定义记录日志的格式（可以定义多种日志格式，取不同名字即可）   |
@@ -802,7 +823,7 @@ access_log  off;    #不记录访问日志
 | $http_referer   | 记录此次请求是从哪个链接访问过来的，可以根据referer进行防盗链设置   |
 | $http_user_agent   | 记录客户端访问信息，例如：浏览器，手机客户端等   |
 | $http_x_forwarded_for   | 当前端有代理服务器是，设置web节点记录客户端地址的配置，此参数生效的前提是代理服务器上也要进行相关的x_forwarded_for 设置   |
-## **日志存放位置**
+## 日志存放位置
 1、全局
 ```
 error_log  logs/error.log;
@@ -824,38 +845,7 @@ error_log  logs/error.log;
             access_log  logs/bbs_access.log;
     }
 ```
-## **日志轮询**
-日志轮询脚本
-cat cut_nginx_log.sh
-```
-#!/bin/bash
-cd /application/nginx/logs && \
-/bin/mv www_access.log www_access_$(date +%F -d -1day).log
-/application/nginx/sbin/nginx -s reload
-```
-cat cut_nginx_log.sh
-```
-#!/bin/bash
-date=`date +%F -d -1day`
-cd /application/nginx/logs && \
-mv www_access.log www_access_${date}.log
-mv bbs_access.log bbs_access_${date}.log
-mv blog_access.log blog_access_${date}.log
-/application/nginx/sbin/nginx -s reload
-```
-cat /server/script/cut_nginx_log.sh
-```
-#!/bin/bash
-Dateformat=`date +%Y%m%d`
-Basedir="/application/nginx"
-Nginxlogdir="$Basedir/logs"
-Logname="access_www"
-[ -d $Nginxlogdir ] && cd $Nginxlogdir||exit 1
-[ -f ${Logname}.log ]||exit 1
-/bin/mv ${Logname}.log ${Dateformat}_${Logname}.log
-$Basedir/sbin/nginx -s reload
-```
-# **nginx  location**
+# nginx  location
 location(位置)指令的作用是可以根据用户请求的URI来执行不同的应用，URI的知识前面已经讲过，其实就是根据用户请求的网站的地址URL匹配，匹配成功即进行相关的操作
 ## **location标签**
 ```
@@ -866,12 +856,12 @@ location[=|~|~*|^~|@] uri {
 | location   | [ = \| ~ \| ~* \| ^~ \| @ ]   | uri   | {...}   |
 |----|----|----|----|
 | 指令   | 匹配标识   | 匹配的网站网址   | 匹配URI后要执行的配置段   |
-### **特殊字符**
+### 特殊字符
 - ~   区分大小写
 - ~*  不区分大小写
 - !    取反
 - ^~  在常规的字符串匹配检查之后，不做正则表达式的检查
-### **location字符组合匹配顺序**
+### location字符组合匹配顺序
 | 1、  location = / {"   | 精确匹配   |
 |----|----|
 | 2、  location ^~ /images/ {"   | 匹配常规字符串，不做正则匹配检查   |
@@ -943,7 +933,7 @@ curl -s -o /dev/null -I -w "%{http_code}\n" www.etiantian.org/images/oldboy.jpg
     return 200 "location /";
   }
 ```
-## **location中root与alias区别**
+## location中root与alias区别
 ```
 [root@web01 conf.d]# cat root.conf
 server {
@@ -974,21 +964,25 @@ alias /local_path/code/;
 ```
 echo "Alias" > /local_path/code/index.html
 ```
-# **nginx rewrite**
-## **nginx rewrite 企业应用场景**
+# nginx rewrite
+## nginx rewrite 企业应用场景
 1、 可以调整用户浏览的URL，看起来更规范，合乎开发及产品人员的需求
-2、 为了让搜索引擎收录网站内容及用户体验更好，企业会将动态URL地址
-伪装成静态地址提供服务
+
+2、 为了让搜索引擎收录网站内容及用户体验更好，企业会将动态URL地址伪装成静态地址提供服务
+
 3、 网站换新域名后，让旧的域名的访问跳转到新的域名上，如：360buy  --->  jd
+
 4、 根据特殊变量、目录、客户端的信息进行URL跳转等
-## **rewrite 语法**
+## rewrite 语法
 指令语法
 ```
 rewrite  regex  replacement  [flag]
 ```
          s#regex#replacement#g
 默认值：none
+
 应用位置：server、location、if
+
 rewrite是实现URL重写的关键指令，根据regex（正则表达式）部分内容，重定向到replacement部分内容，结尾是flag标记
 
 在匹配过程中可以引用一些nginx的全局变量
@@ -1000,13 +994,15 @@ $request_uri 当前请求的文件路径名（不带网站的主目录/images/te
 $scheme  用的协议，比如http或者https
 ```
 flag标记说明
+
 | last   | 本条规则匹配完成后，继续向下匹配新的location URI 规则   |
 |----|----|
 | break   | 本条规则匹配完成即终止，不再匹配后面的任何规则   |
 | redirect   | 返回302临时重定向，浏览器地址栏会显示跳转后的URL地址   |
 | permanent   | 返回301永久重定向，浏览器地址栏会显示跳转后的URL地址   |
+
 http://oldboy.blog.51cto.com/2561410/1774260
-### **对比last与break**
+### 对比last与break
 ```
 server {
     listen 80;
@@ -1059,7 +1055,7 @@ cat www.conf
 [root@web01 conf]# curl -Lv etiantian.org
 web01 www
 ```
-### **blog.etiantian.org   跳转到   http://www.etiantian.org/blog/oldboy.html**
+### blog.etiantian.org   跳转到   http://www.etiantian.org/blog/oldboy.html
 cat blog.conf
 ```
     server {
@@ -1082,11 +1078,12 @@ cat blog.conf
 total 4
 -rw-r--r-- 1 root root 7 Oct 18 14:43 oldboy.html
 ```
-### **http://www.etiantian.org/blog/  调转为 blog.etiantian.org**
+### http://www.etiantian.org/blog/  调转为 blog.etiantian.org
 企业blog旧的地址为：http://www.etiantian.org/blog/
 现在企业新增加了新域名，希望所有用户都使用blog.etiantian.org，
 但是老用户可能还会记着老地址，当这部分用户访问老地址时，
 给他跳转到新地址上blog.etiantian.org
+
 cat 01_www.conf
 ```
 server {
@@ -1100,7 +1097,7 @@ server {
   access_log  logs/www_access.log main;
 }
 ```
-### **360buy.com  跳转到  jd.com**
+### 360buy.com  跳转到  jd.com
 ```
 server {
         listen       80;
@@ -1111,7 +1108,7 @@ server {
 
     }
 ```
-### **反向代理**
+### 反向代理
 ```
     server {
         listen       80;
@@ -1131,12 +1128,13 @@ server {
 
     }
 ```
-## **wordpress伪静态**
+## wordpress伪静态
 1.在WordPress后台-设置-固定链接-自定义结构，输入下面的代码，最后保存更改即可。
 /archives/%post_id%.html
 
 2、nginx配置文件的server容器中添加下面的代码
 方法1：
+
 cat blog.conf
 ```
     server {
@@ -1172,10 +1170,13 @@ cat blog.conf
     try_files $uri $uri/ /index.php?q=$uri&$args;
         }
 ```
-# **nginx  if**
+# nginx  if
 语法：
+
 Syntax: if (condition) { ... }
+
 Default: —
+
 Context: server, location
 
 运算符
@@ -1208,27 +1209,28 @@ if ($invalid_referer) {
     return 403;
 }
 ```
-# **perl正则**
+# perl正则
 [https://www.runoob.com/perl/perl-regular-expressions.html](https://www.runoob.com/perl/perl-regular-expressions.html)
+
 | 字符   | 描述   |
 |----|----|
 | \   | 将后面接着的字符标记为一个特殊字符或一个原义字符或一个后向引用。  例如，\n  匹配一个换行符，序列  \\  和  \$  匹配 $   |
 | ^   | 匹配输入字符串的起始位置，如果设置regexp对象的Multiline属性， ^也匹配    \n   或  r  之后的位置   |
 | $   | 匹配输入字符串的结束位置，如果设置了regexp对象的Multiline属性， $也匹配  \n  或  \r  之前的位置   |
-# **lnmp**
+# lnmp
 [图片上传失败...(image-d7a4ca-1561896934468)]
 [图片上传失败...(image-598de6-1561896934468)]
-## **设置mysql管理员密码**
+## 设置mysql管理员密码
 ```
 mysqladmin -uroot password '123456'
 ```
-## **修改mysql管理员秘密**
+## 修改mysql管理员秘密
 ```
 [root@web01 ~]# mysqladmin -uroot -p password 'oldboy123'
 Enter password:
 Warning: Using a password on the command line interface can be insecure.
 ```
-## **删除无用的库和用户**
+## 删除无用的库和用户
 ```
 drop database test;
 
@@ -1267,6 +1269,7 @@ php71w-embedded php71w-gd php71w-mbstring php71w-pdo php71w-xml php71w-fpm \
 php71w-mysqlnd php71w-opcache php71w-mcrypt php71w-pecl-memcached php71w-pecl-mongodb php71w-pecl-redis
 ```
 [https://mirrors.tuna.tsinghua.edu.cn/remi/enterprise/](https://mirrors.tuna.tsinghua.edu.cn/remi/enterprise/)
+
 [https://mirrors.tuna.tsinghua.edu.cn/remi/enterprise/remi-release-7.rpm](https://mirrors.tuna.tsinghua.edu.cn/remi/enterprise/remi-release-7.rpm)
 ```
 yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
@@ -1320,6 +1323,7 @@ php71-php-mcrypt php71-php-pecl-memcached php71-php-pecl-redis
       state: restarted
 ```
 [图片上传失败...(image-4cbdfb-1561896934468)]
+
 Nginx不支持对外部动态程序的直接调用或者解析，所有的外部程序（包括php）必须通过FastCGI接口来调用。FastCGI接口在linux下是socket，为了调用CGI程序，还需要一个FastCGI的wrapper（可以理解为用于启动另一个程序的程序），这个wrapper绑定在某个固定的socket上，如端口或者文件socket。当nginx将CGI请求发送给这个socket的时候，通过FastCGI接口，wrapper接收到请求，然后派生出一个新的线程，这个线程调用解释器或外部程序处理脚本来读取返回的数据；接着，wrapper再将返回的数据通过FastCGI接口，沿着固定的socket传递给nginx；最后，nginx将返回的数据发送给客户端，这就是nginx+FastCGI的整个运作过程
 ## 源码安装php
 安装依赖包
@@ -1350,7 +1354,7 @@ ln -s /usr/local/lib/libmhash.so.2 /usr/lib64/libmhash.so.2
 ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib64/libmhash.so.2.0.1
 ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
 ```
-### **php5.3**
+### php5.3
 ```
 ./configure \
 --prefix=/application/php-5.3.27 \
@@ -1395,7 +1399,7 @@ ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
 ln -s /application/mysql/lib/libmysqlclient.so.18 /usr/lib64/
 touch ext/phar/phar.phar
 ```
-### **php5.5**
+### php5.5
 ```
 ./configure \
 --prefix=/application/php-5.5.32 \
@@ -1444,29 +1448,29 @@ make install
 ```
 ln -s /application/php5.3.27 /application/php
 ```
-### **拷贝配置文件**
+### 拷贝配置文件
 ```
 cp php.ini-production /application/php/lib/php.ini
 ```
-### **主配置文件**
+### 主配置文件
 ```
 /application/php/etc/php-fpm.conf
 ```
-## **检查语法**
+## 检查语法
 ```
 /application/php/sbin/php-fpm -t
 ```
-## **启动php**
+## 启动php
 ```
 /application/php/sbin/php-fpm
 ```
-## **查看进程**
+## 查看进程
 ```
 netstat -lntup |grep php-fpm
 tcp        0      0 127.0.0.1:9000              0.0.0.0:*                   LISTEN      50888/php-fpm
 ```
-# **nginx整合php**
-## **nginx配置文件**
+# nginx整合php
+## nginx配置文件
 blog.oldboy.com.conf
 ```
 server {
@@ -1510,7 +1514,7 @@ server {
         }
 }
 ```
-## **phpinfo**
+## phpinfo
 cat index.php
 ```php
 <?php
@@ -1519,6 +1523,7 @@ phpinfo();
 ```
 ## **php连接MySQL测试**
 [https://secure.php.net/manual/zh/function.mysqli-connect.php](https://secure.php.net/manual/zh/function.mysqli-connect.php)
+
 cat oldboy_mysql.php
 ```
 <?php
@@ -1562,13 +1567,13 @@ php7连接mysql测试代码
     $mysqli->close();
 ?>
 ```
-## **执行页面**
+## 执行页面
 ```
 /application/php/bin/php oldboy_mysql.php
 mysql successful by oldboy !
 ```
 LNMP安装完成！
-# **WordPress**
+# WordPress
 创建博客数据库
 ```
 create database blog;
@@ -1586,7 +1591,8 @@ edusoho连接数据库文件
 ```
 app/config/parameters.yml
 ```
-**上传文件大小限制**
+上传文件大小限制
+
 nginx.conf http{}中添加（如果有代理，代理也需添加）
 ```
 client_max_body_size 300m;
